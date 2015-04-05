@@ -1,0 +1,17 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/primary_dark</item>
+        <item name="windowActionBar">false</item>
+
+        <!--Set button color-->
+        <item name="colorButtonNormal">@color/primary</item>
+
+        <!--Set Ripple color-->
+        <!--<item name="colorControlHighlight">@color/ripple</item>-->
+
+    </style>
+
+</resources>

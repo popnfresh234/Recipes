@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="primary">#ff9800</color>
+    <color name="primary_dark">#f57c00</color>
+    <color name="accent">#ffd180</color>
+    <color name="ripple">#ffd180</color>
+
+    <color name="text_primary">#FFFFFF</color>
+    <color name="bkg_card">#8C9EFF</color>
+
+    <!--ButtonColors-->
+    <color name="PRESSED_STATE_COLOR">#8C9EFF</color>
+    <color name="FOCUSED_STATE_COLOR">#F50056</color>
+    <color name="NORMAL_STATE_COLOR">#303F9F</color>
+
+    <color name="activity_background">#e0e0e0</color>
+    <color name="recyclerview_frame">#acacac</color>
+
+</resources>

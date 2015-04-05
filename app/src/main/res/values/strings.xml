@@ -1,0 +1,41 @@
+<resources>
+    <string name="app_name">Recipes</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="drawer_open">open</string>
+    <string name="drawer_close">close</string>
+
+    <string-array name="dialog_spinner_fractions">
+        <item>Fractions</item>
+        <item>⅛ </item>
+        <item>¼</item>
+        <item>⅓</item>
+        <item>½</item>
+        <item>¾</item>
+    </string-array>
+
+    <string-array name="dialog_spinner_units">
+        <item>Units</item>
+        <item>mg</item>
+        <item>g</item>
+        <item>kg</item>
+        <item>mL</item>
+        <item>L</item>
+        <item>teaspoon</item>
+        <item>tablespoon</item>
+        <item>cup</item>
+        <item>piece</item>
+        <item>box</item>
+        <item>stick</item>
+        <item>(to taste)</item>
+    </string-array>
+
+    <string-array name="navigation_items">
+        <item>Home</item>
+        <item>Drunken Monkey Recipes</item>
+        <item>My Recipes</item>
+    </string-array>
+
+</resources>
+

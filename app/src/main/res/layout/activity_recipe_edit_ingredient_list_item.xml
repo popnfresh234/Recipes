@@ -1,0 +1,77 @@
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="5dp"
+    android:clickable="true"
+    android:foreground="?android:attr/selectableItemBackground"
+    card_view:cardCornerRadius="2dp"
+    card_view:cardElevation="4dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+
+        <RelativeLayout
+            android:id="@+id/relative_layout_ingredient_list_item"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingLeft="8dp"
+            android:layout_weight="1"
+            >
+
+
+            <TextView
+                android:id="@+id/text_view_ingredient_list_edit_quantity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:paddingBottom="8dp"
+                android:paddingTop="8dp" />
+
+            <TextView
+                android:id="@+id/text_view_ingredient_list_edit_fraction"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/text_view_ingredient_list_edit_quantity"
+                android:paddingBottom="8dp"
+                android:paddingTop="8dp"
+                />
+
+            <TextView
+
+                android:id="@+id/text_view_ingredient_list_edit_unit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/text_view_ingredient_list_edit_fraction"
+                android:paddingBottom="8dp"
+                android:paddingTop="8dp"
+                />
+
+            <TextView
+                android:id="@+id/text_view_ingredient_list_edit_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/text_view_ingredient_list_edit_unit"
+                android:paddingBottom="8dp"
+                android:paddingTop="8dp"
+                />
+
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/button_move_up"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:minHeight="2dp"
+            android:minWidth="2dp"
+            android:text="Move Up"
+            android:layout_gravity="center_vertical"/>
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>
