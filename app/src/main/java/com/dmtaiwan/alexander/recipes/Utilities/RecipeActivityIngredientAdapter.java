@@ -15,26 +15,38 @@ import java.util.List;
 /**
  * Created by Alexander on 4/5/2015.
  */
-public class RecipeIngredientAdapter extends RecyclerView.Adapter<RecipeIngredientAdapter.ViewHolder> {
+public class RecipeActivityIngredientAdapter extends RecyclerView.Adapter<RecipeActivityIngredientAdapter.ViewHolder> {
     private List<Ingredient> mIngredients;
     private Context mContext;
 
-    public RecipeIngredientAdapter(List<Ingredient> ingredients, Context context) {
+    public RecipeActivityIngredientAdapter(List<Ingredient> ingredients, Context context) {
         this.mIngredients = ingredients;
         this.mContext = context;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_recipe_list_item, parent, false);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_recipe_ingredient_list_item, parent, false);
         return new ViewHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         final Ingredient ingredient = mIngredients.get(position);
-        if ((position+1) % 2 == 0) {
+        if (position % 2 == 0) {
+            holder.layout.setBackgroundColor(mContext.getResources().getColor(android.R.color.white));
+            holder.quantity.setTextColor(mContext.getResources().getColor(R.color.app_compat_light_text));
+            holder.fraction.setTextColor(mContext.getResources().getColor(R.color.app_compat_light_text));
+            holder.unit.setTextColor(mContext.getResources().getColor(R.color.app_compat_light_text));
+            holder.name.setTextColor(mContext.getResources().getColor(R.color.app_compat_light_text));
+
+        }else{
+
             holder.layout.setBackgroundColor(mContext.getResources().getColor(R.color.activity_background));
+            holder.quantity.setTextColor(mContext.getResources().getColor(R.color.app_compat_light_text));
+            holder.fraction.setTextColor(mContext.getResources().getColor(R.color.app_compat_light_text));
+            holder.unit.setTextColor(mContext.getResources().getColor(R.color.app_compat_light_text));
+            holder.name.setTextColor(mContext.getResources().getColor(R.color.app_compat_light_text));
         }
         //Clear out the view
         holder.quantity.setText("");

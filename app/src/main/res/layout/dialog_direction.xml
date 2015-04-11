@@ -14,8 +14,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="8dp"
+        android:textColor="@color/app_compat_light_text"
         android:hint="Enter directions here.  Try to keep it short and simple."
-        android:background="@color/activity_background"/>
+        android:textColorHint="@color/app_compat_light_text"
+        android:background="@android:color/white"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -28,7 +30,8 @@
             android:layout_alignParentRight="true"
             android:minHeight="0dp"
             android:minWidth="0dp"
-            android:text="Add"/>
+            android:text="Add"
+            android:background="@drawable/custom_button"/>
 
         <Button
             android:id="@+id/dialog_button_cancel_direction"

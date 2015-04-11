@@ -23,7 +23,9 @@
             android:hint="Qty."
             android:inputType="numberDecimal"
             android:padding="8dp"
-            android:textSize="12sp"/>
+            android:textSize="12sp"
+            android:textColor="@color/app_compat_light_text"
+            android:textColorHint="@color/app_compat_light_hint"/>
 
         <Spinner
             android:id="@+id/dialog_spinner_fractions"
@@ -55,7 +57,9 @@
         android:layout_marginTop="8dp"
         android:background="@android:color/white"
         android:hint="Ingredient Name"
-        android:padding="8dp" />
+        android:padding="8dp"
+        android:textColor="@color/app_compat_light_text"
+        android:textColorHint="@color/app_compat_light_hint"/>
 
     <RelativeLayout
         android:layout_width="match_parent"

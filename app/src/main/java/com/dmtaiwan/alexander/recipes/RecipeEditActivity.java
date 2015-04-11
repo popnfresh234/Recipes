@@ -2,16 +2,22 @@ package com.dmtaiwan.alexander.recipes;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -24,9 +30,12 @@ import com.dmtaiwan.alexander.recipes.Utilities.JsonRecipe;
 import com.dmtaiwan.alexander.recipes.Utilities.RecipeEditActivityDirectionAdapter;
 import com.dmtaiwan.alexander.recipes.Utilities.RecipeEditActivityIngredientAdapter;
 import com.google.gson.Gson;
+import com.parse.DeleteCallback;
 import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
+import com.parse.ParseUser;
+import com.parse.SaveCallback;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +46,10 @@ import java.util.List;
 public class RecipeEditActivity extends ActionBarActivity implements AdapterListener {
     public static final String GSON_RECIPE = "gson_recipe";
     public static final String RECIPE_ID = "recipe_id";
+    public static final String DRUNKENMOKEYTW_ID = "uZq0TrDbkj";
+
     private Context mContext = this;
+    private Toolbar mToolbar;
 
     private ParseRecipe mRecipe;
 
@@ -74,6 +86,8 @@ public class RecipeEditActivity extends ActionBarActivity implements AdapterList
     private Button mDialogCancelDirectionButton;
     private Button mDialogRemoveDirectionButton;
 
+    private InputMethodManager mImm;
+
     //Setup ArrayList of Ingredients and Direction
     private List<Ingredient> mIngredientList = null;
     private List<Direction> mDirectionList = null;
@@ -86,6 +100,25 @@ public class RecipeEditActivity extends ActionBarActivity implements AdapterList
 
 
         setContentView(R.layout.activity_recipe_edit);
+
+        //Get input method manager
+        mImm = (InputMethodManager)getSystemService(
+                Context.INPUT_METHOD_SERVICE);
+
+        //Setup toolbar
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                return false;
+            }
+        });
+        if (mToolbar != null) {
+            setSupportActionBar(mToolbar);
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
+        }
+        //end toolbar
+
         mIngredientList = new ArrayList<Ingredient>();
         mDirectionList = new ArrayList<Direction>();
         mTitleEditText = (EditText) findViewById(R.id.edit_text_title);
@@ -140,8 +173,21 @@ public class RecipeEditActivity extends ActionBarActivity implements AdapterList
                     String gsonRecipe = gson.toJson(jsonRecipe);
                     mRecipe.setGsonRecipe(gsonRecipe);
                     mRecipe.setTitle(title);
-                    mRecipe.saveInBackground();
-                }else{
+                    mRecipe.setTitleLowerCase(title.toLowerCase());
+                    mRecipe.setAuthor();
+                    //If current user is drunkenmonkeytw set flag
+                    String userId = ParseUser.getCurrentUser().getObjectId().toString();
+                    if (userId.equals(DRUNKENMOKEYTW_ID)) {
+                        mRecipe.setCreatedByDm(true);
+                    }
+                    mRecipe.saveInBackground(new SaveCallback() {
+                        @Override
+                        public void done(ParseException e) {
+                            finish();
+                        }
+                    });
+
+                } else {
                     Toast.makeText(mContext, "Please enter a title for your ingredient", Toast.LENGTH_LONG).show();
                 }
             }
@@ -153,14 +199,39 @@ public class RecipeEditActivity extends ActionBarActivity implements AdapterList
         }
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_recipe_edit, menu);
+        return true;
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_signout) {
+            ParseUser.logOut();
+            navigateToLogin();
+            return true;
+        } else if (id == R.id.action_delete) {
+            final ProgressBar progressBar = (ProgressBar) findViewById(R.id.toolbar_progress_spinner);
+            progressBar.setVisibility(View.VISIBLE);
+            mRecipe.deleteInBackground(new DeleteCallback() {
+                @Override
+                public void done(ParseException e) {
+                    progressBar.setVisibility(View.INVISIBLE);
+                    finish();
+                }
+            });
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
     @Override
     protected void onPause() {
         super.onPause();
         if (mTitleEditText.getText().toString().trim().length() > 0) {
 
-
+            //TODO save on pause
         }
 
     }
@@ -226,6 +297,8 @@ public class RecipeEditActivity extends ActionBarActivity implements AdapterList
 
         //Setup EditText
         mDialogDirectionEditText = (EditText) dialog.findViewById(R.id.dialog_edit_text_direction);
+
+
         if (!mNewDirection) mDialogDirectionEditText.setText(mDirection.getDirection());
 
         //Add Direction Button
@@ -240,8 +313,8 @@ public class RecipeEditActivity extends ActionBarActivity implements AdapterList
 
                 if (!mDialogDirectionEditText.getText().toString().equals("")) {
                     mDirection.setDirection(mDialogDirectionEditText.getText().toString().trim());
-
-
+                    //Hide the keyboard
+                    mImm.hideSoftInputFromWindow(mDialogDirectionEditText.getWindowToken(), 0);
                     dialog.dismiss();
 
                     if (position == -1) {
@@ -252,6 +325,8 @@ public class RecipeEditActivity extends ActionBarActivity implements AdapterList
                     if (mDirectionList.size() > 0) {
                         mDirectionsRecyclerView.setVisibility(View.VISIBLE);
                     }
+
+
                     mDirectionAdapter.notifyDataSetChanged();
                 } else {
                     Toast.makeText(mContext, "Please enter an ingredient", Toast.LENGTH_SHORT).show();
@@ -327,7 +402,7 @@ public class RecipeEditActivity extends ActionBarActivity implements AdapterList
         //Setup unit spinner
         mDialogUnitSpinner = (Spinner) dialog.findViewById(R.id.dialog_spinner_units);
         ArrayAdapter<CharSequence> unitSpinnerAdapter = ArrayAdapter.createFromResource(mContext, R.array.dialog_spinner_units, R.layout.dialog_spinner_item);
-        fractionsSpinnerAdapter.setDropDownViewResource(R.layout.dialog_spinner_layout);
+        unitSpinnerAdapter.setDropDownViewResource(R.layout.dialog_spinner_layout);
         mDialogUnitSpinner.setAdapter(unitSpinnerAdapter);
         if (!mNewIngredient && mIngredient.getUnits() != null) {
             String compareValue = mIngredient.getUnits();
@@ -346,7 +421,8 @@ public class RecipeEditActivity extends ActionBarActivity implements AdapterList
             @Override
             public void onClick(View v) {
                 mNewIngredient = false;
-
+                mImm.hideSoftInputFromWindow(mDialogQuantityEditText.getWindowToken(), 0);
+                mImm.hideSoftInputFromWindow(mDialogIngredientNameEditText.getWindowToken(), 0);
                 if (!mDialogIngredientNameEditText.getText().toString().equals("")) {
 
                     if (!mDialogQuantityEditText.getText().toString().equals("")) {
@@ -438,5 +514,11 @@ public class RecipeEditActivity extends ActionBarActivity implements AdapterList
     public void onDirectionCardViewClicked(int position) {
         Direction direction = mDirectionList.get(position);
         CreateDirectionDialog(direction, position);
+    }
+
+    private void navigateToLogin() {
+        Intent i = new Intent(this, LoginActivity.class);
+        startActivity(i);
+        finish();
     }
 }
