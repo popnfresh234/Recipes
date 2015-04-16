@@ -14,27 +14,43 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 
+import com.dmtaiwan.alexander.recipes.Parse.CustomParseAdapter;
+import com.dmtaiwan.alexander.recipes.Parse.ParseRecipe;
+import com.parse.ParseQueryAdapter;
 import com.parse.ParseUser;
+
+import java.util.List;
 
 /**
  * Created by Alexander on 4/5/2015.
  */
 public class HomeActivity extends ActionBarActivity {
+
+
     private Context mContext = this;
 
     //nav drawer stuff
     private Toolbar toolbar;
+    private ProgressBar progressBar;
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle drawerToggle;
     private ListView leftDrawerList;
     private ArrayAdapter<String> navigationDrawerAdapter;
+    //end nav drawer
+
+    //list view
+    private ListView mListView;
+    CustomParseAdapter mAdapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         checkParseUser();
         setContentView(R.layout.activity_home);
+        progressBar = (ProgressBar) findViewById(R.id.toolbar_progress_spinner);
+        mListView = (ListView) findViewById(R.id.list_view_home);
         setupNavDrawer();
     }
 
@@ -43,7 +59,6 @@ public class HomeActivity extends ActionBarActivity {
         getMenuInflater().inflate(R.menu.menu_home, menu);
         return true;
     }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -57,6 +72,37 @@ public class HomeActivity extends ActionBarActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mAdapter = new CustomParseAdapter(this, RecipeListActivity.RECENT_RECIPES);
+        mAdapter.setPaginationEnabled(false);
+        mAdapter.addOnQueryLoadListener(new ParseQueryAdapter.OnQueryLoadListener<ParseRecipe>() {
+            @Override
+            public void onLoading() {
+                progressBar.setVisibility(View.VISIBLE);
+
+            }
+
+            @Override
+            public void onLoaded(List<ParseRecipe> parseRecipes, Exception e) {
+                progressBar.setVisibility(View.GONE);
+            }
+        });
+        mListView.setAdapter(mAdapter);
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                ParseRecipe recipe = (ParseRecipe) mListView.getItemAtPosition(position);
+                String recipeId = recipe.getObjectId();
+                Intent i = new Intent(mContext, RecipeActivity.class);
+                i.putExtra(RecipeActivity.RECIPE_ID, recipeId);
+                startActivity(i);
+            }
+        });
+
     }
 
     private void checkParseUser() {

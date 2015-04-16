@@ -17,7 +17,6 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -30,7 +29,6 @@ import com.dmtaiwan.alexander.recipes.Utilities.JsonRecipe;
 import com.dmtaiwan.alexander.recipes.Utilities.RecipeEditActivityDirectionAdapter;
 import com.dmtaiwan.alexander.recipes.Utilities.RecipeEditActivityIngredientAdapter;
 import com.google.gson.Gson;
-import com.parse.DeleteCallback;
 import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
@@ -94,7 +92,6 @@ public class RecipeEditActivity extends ActionBarActivity implements AdapterList
 
 
     @Override
-
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
@@ -212,16 +209,6 @@ public class RecipeEditActivity extends ActionBarActivity implements AdapterList
             ParseUser.logOut();
             navigateToLogin();
             return true;
-        } else if (id == R.id.action_delete) {
-            final ProgressBar progressBar = (ProgressBar) findViewById(R.id.toolbar_progress_spinner);
-            progressBar.setVisibility(View.VISIBLE);
-            mRecipe.deleteInBackground(new DeleteCallback() {
-                @Override
-                public void done(ParseException e) {
-                    progressBar.setVisibility(View.INVISIBLE);
-                    finish();
-                }
-            });
         }
         return super.onOptionsItemSelected(item);
     }

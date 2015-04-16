@@ -20,7 +20,7 @@
             android:layout_marginRight="8dp"
             android:layout_weight="1"
             android:background="@android:color/white"
-            android:hint="Qty."
+            android:hint="@string/hint_dialog_ingredient_quantity"
             android:inputType="numberDecimal"
             android:padding="8dp"
             android:textSize="12sp"
@@ -56,7 +56,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:background="@android:color/white"
-        android:hint="Ingredient Name"
+        android:hint="@string/hint_dialog_ingredient_name"
         android:padding="8dp"
         android:textColor="@color/app_compat_light_text"
         android:textColorHint="@color/app_compat_light_hint"/>
@@ -73,7 +73,7 @@
             android:layout_alignParentRight="true"
             android:minHeight="0dp"
             android:minWidth="0dp"
-            android:text="Add"
+            android:text="@string/button_dialog_add"
             android:background="@drawable/custom_button"/>
 
         <Button
@@ -82,7 +82,7 @@
             android:layout_height="wrap_content"
             android:layout_toLeftOf="@id/dialog_button_add_ingredient"
             android:clickable="true"
-            android:text="Cancel"
+            android:text="@string/button_dialog_cancel"
             android:minHeight="0dp"
             android:minWidth="0dp"/>
 
@@ -95,7 +95,7 @@
             android:minWidth="0dp"
             android:foreground="?android:attr/selectableItemBackground"
             android:clickable="true"
-            android:text="Remove"
+            android:text="@string/button_dialog_remove"
             android:visibility="gone"/>
 
     </RelativeLayout>

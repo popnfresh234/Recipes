@@ -16,6 +16,8 @@ import com.parse.ParseUser;
  * Created by Alexander on 4/4/2015.
  */
 public class CustomParseAdapter extends ParseQueryAdapter<ParseRecipe> {
+    private String mQueryCode;
+
     public CustomParseAdapter(Context context, final String queryCode) {
 
 // Use the QueryFactory to construct a PQA that will show all restaurants
@@ -31,6 +33,10 @@ public class CustomParseAdapter extends ParseQueryAdapter<ParseRecipe> {
                 } else if (queryCode.equals(RecipeListActivity.MY_RECIPES)) {
                     query.whereEqualTo(ParseConstants.KEY_AUTHOR, ParseUser.getCurrentUser());
                     query.addAscendingOrder(ParseConstants.KEY_TITLE_LOWERCASE);
+                }else if (queryCode.equals(RecipeListActivity.RECENT_RECIPES)) {
+                    query.whereExists(ParseConstants.KEY_CREATED_BY_DM);
+                    query.setLimit(3);
+                    query.orderByDescending("createdAt");
                 }
                 return query;
 

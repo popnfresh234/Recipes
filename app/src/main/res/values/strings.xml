@@ -5,6 +5,34 @@
 
     <string name="drawer_open">open</string>
     <string name="drawer_close">close</string>
+    <string name="button_login_login">Log In</string>
+    <string name="text_view_login_signup">Don\'t have an account? Sign up!</string>
+    <string name="text_view_login_forgot_password">Forgot your password?</string>
+    <string name="text_view_recipe_ingredients_title">Ingredients</string>
+    <string name="text_view_recipe_directions_title">Directions</string>
+    <string name="button_recipe_edit_up_arrow">↑</string>
+    <string name="text_view_recipe_edit_title">Title</string>
+    <string name="hint_recipe_edit_title_hint">Enter Title</string>
+    <string name="text_view_recipe_edit_ingredients_title">Ingredients</string>
+    <string name="button_recipe_edit_add_ingredient">Add Ingredient</string>
+    <string name="text_view_recipe_edit_directions_title">Directions</string>
+    <string name="button_recipe_edit_add_direction">Add Direction Step</string>
+    <string name="button_recipe_edit_save">Save</string>
+    <string name="button_signup_signup">Sign Up</string>
+    <string name="button_signup_cancel">Cancel</string>
+    <string name="hint_username">Enter Username</string>
+    <string name="hint_password">Enter Password</string>
+    <string name="hint_email">Enter Email</string>
+    <string name="button_dialog_add">Add</string>
+    <string name="button_dialog_cancel">Cancel</string>
+    <string name="button_dialog_remove">Remove</string>
+    <string name="hint_dialog_directions">Enter directions here. Try to keep it short and simple.</string>
+    <string name="hint_dialog_ingredient_name">Ingredient Name</string>
+    <string name="hint_dialog_ingredient_quantity">Qty.</string>
+    <string name="menu_sign_out">Sign Out</string>
+    <string name="menu_edit_recipe">Edit Recipe</string>
+    <string name="menu_new">New Recipe</string>
+    <string name="text_view_home_latest">Latest Recipes</string>
 
     <string-array name="dialog_spinner_fractions">
         <item>Fractions</item>

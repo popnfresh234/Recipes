@@ -37,6 +37,7 @@ public class RecipeListActivity extends ActionBarActivity {
     public static final String QUERY_CODE = "query_code";
     public static final String MY_RECIPES = "my_recipes";
     public static final String DRUNKEN_MONKEY_RECIPES = "drunken_monkey_recipes";
+    public static final String RECENT_RECIPES = "recent_recipes";
     public static final String ALL_RECIPES = "all_recipes";
 
     private ListView mListView;
@@ -170,9 +171,7 @@ public class RecipeListActivity extends ActionBarActivity {
 
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_recipe_list, menu);
-        Log.i("HIDDEN", "HIDDEN");
         if (!ParseUser.getCurrentUser().getObjectId().toString().equals(RecipeEditActivity.DRUNKENMOKEYTW_ID)&&mQueryCode.equals(DRUNKEN_MONKEY_RECIPES)) {
-            Log.i("HIDDEN", "HIDDEN");
             menu.findItem(R.id.action_new).setVisible(false);
         }
         return true;

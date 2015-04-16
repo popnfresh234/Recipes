@@ -7,6 +7,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +20,7 @@ import com.parse.ParseUser;
  */
 public class LoginActivity extends ActionBarActivity implements View.OnClickListener {
 
+    ProgressBar mProgressBar;
     EditText mUsernameEditText;
     EditText mPasswordEditText;
     Button mLoginButton;
@@ -33,7 +35,7 @@ public class LoginActivity extends ActionBarActivity implements View.OnClickList
         setContentView(R.layout.activity_login);
         mContext = this;
 
-
+        mProgressBar = (ProgressBar) findViewById(R.id.login_progress_spinner);
         mUsernameEditText = (EditText) findViewById(R.id.text_view_login_username);
         mPasswordEditText = (EditText) findViewById(R.id.text_view_login_password);
         mLoginButton = (Button) findViewById(R.id.button_login_login);
@@ -54,15 +56,19 @@ public class LoginActivity extends ActionBarActivity implements View.OnClickList
         int id = v.getId();
         switch (id) {
             case R.id.button_login_login:
+                mProgressBar.setVisibility(View.VISIBLE);
                 String username = mUsernameEditText.getText().toString().trim();
                 String password = mPasswordEditText.getText().toString().trim();
                 ParseUser.logInInBackground(username, password, new LogInCallback() {
                     @Override
                     public void done(ParseUser user, ParseException e) {
                         if (e == null) {
+                            mProgressBar.setVisibility(View.GONE);
                             Intent i = new Intent(mContext, HomeActivity.class);
                             startActivity(i);
+
                         }else {
+                            mProgressBar.setVisibility(View.GONE);
                             Toast.makeText(mContext, e.toString(), Toast.LENGTH_LONG).show();
                         }
                     }

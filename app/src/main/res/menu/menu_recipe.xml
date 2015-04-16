@@ -5,6 +5,6 @@
     <item
         android:id="@+id/action_edit"
         android:orderInCategory="100"
-        android:title="Edit Recipe"
+        android:title="@string/menu_edit_recipe"
         app:showAsAction="never" />
 </menu>

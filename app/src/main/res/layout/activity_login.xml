@@ -21,11 +21,13 @@
         android:layout_weight="1"
         android:orientation="vertical">
 
+
+
         <EditText
             android:id="@+id/text_view_login_username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter Username"
+            android:hint="@string/hint_username"
             android:singleLine="true"
             android:imeOptions="actionDone"
             android:textColor="@color/app_compat_light_text"
@@ -35,7 +37,7 @@
             android:id="@+id/text_view_login_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter Password"
+            android:hint="@string/hint_password"
             android:inputType="textPassword"
             android:textColor="@color/app_compat_light_text"
             android:textColorHint="@color/app_compat_light_hint"/>
@@ -46,7 +48,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/custom_button"
-            android:text="Log In" />
+            android:text="@string/button_login_login" />
 
         <!--<Button-->
             <!--android:id="@+id/button_login_facebook"-->
@@ -55,6 +57,16 @@
             <!--android:background="@drawable/custom_button"-->
             <!--android:text="Log In with Facebook" />-->
 
+        <ProgressBar
+            android:id="@+id/login_progress_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:indeterminate="true"
+            android:indeterminateDrawable="@drawable/custom_progress"
+            android:visibility="gone"
+            />
+
 
         <TextView
             android:id="@+id/text_view_login_signup"
@@ -62,7 +74,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Don't have an account? Sign up!" />
+            android:text="@string/text_view_login_signup" />
 
         <TextView
             android:id="@+id/text_view_login_forgot_passowrd"
@@ -70,7 +82,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Forgot your password?" />
+            android:text="@string/text_view_login_forgot_password" />
 
 
     </LinearLayout>

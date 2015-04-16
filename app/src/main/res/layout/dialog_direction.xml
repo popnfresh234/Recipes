@@ -15,9 +15,10 @@
         android:layout_height="wrap_content"
         android:padding="8dp"
         android:textColor="@color/app_compat_light_text"
-        android:hint="Enter directions here.  Try to keep it short and simple."
+        android:hint="@string/hint_dialog_directions"
         android:textColorHint="@color/app_compat_light_text"
-        android:background="@android:color/white"/>
+        android:background="@android:color/white"
+        android:inputType="textCapWords|textMultiLine"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -30,7 +31,7 @@
             android:layout_alignParentRight="true"
             android:minHeight="0dp"
             android:minWidth="0dp"
-            android:text="Add"
+            android:text="@string/button_dialog_add"
             android:background="@drawable/custom_button"/>
 
         <Button
@@ -40,7 +41,7 @@
             android:layout_toLeftOf="@id/dialog_button_add_direction"
             android:minHeight="0dp"
             android:minWidth="0dp"
-            android:text="Cancel"/>
+            android:text="@string/button_dialog_cancel"/>
 
         <Button
             android:id="@+id/dialog_button_remove_direction"
@@ -49,7 +50,7 @@
             android:layout_alignParentLeft="true"
             android:minHeight="0dp"
             android:minWidth="0dp"
-            android:text="Remove"
+            android:text="@string/button_dialog_remove"
             android:visibility="gone"/>
 
         </RelativeLayout>

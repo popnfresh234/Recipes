@@ -23,7 +23,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Title"
+                android:text="@string/text_view_recipe_edit_title"
                 />
 
             <EditText
@@ -32,17 +32,18 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:background="@android:color/white"
-                android:hint="Enter Title"
+                android:hint="@string/hint_recipe_edit_title_hint"
                 android:padding="4dp"
                 android:textColorHint="@color/app_compat_light_hint"
                 android:imeOptions="actionDone"
-                android:singleLine="true"/>
+                android:singleLine="true"
+                android:inputType="textCapWords"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="Ingredients" />
+                android:text="@string/text_view_recipe_edit_ingredients_title" />
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recycler_view_ingredients"
@@ -57,14 +58,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:background="@drawable/custom_button"
-                android:text="Add Ingredient"
+                android:text="@string/button_recipe_edit_add_ingredient"
                 android:textColor="@android:color/white" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:text="Directions" />
+                android:text="@string/text_view_recipe_edit_directions_title" />
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recycler_view_directions"
@@ -79,7 +80,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/custom_button"
-                android:text="Add Direction Step"
+                android:text="@string/button_recipe_edit_add_direction"
                 android:textColor="@android:color/white" />
 
             <Button
@@ -88,7 +89,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/activity_vertical_margin"
                 android:background="@drawable/custom_button"
-                android:text="Save"
+                android:text="@string/button_recipe_edit_save"
                 android:textColor="@android:color/white" />
 
 
